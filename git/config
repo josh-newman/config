@@ -1,0 +1,16 @@
+[user]
+	name = Joshua Newman
+[alias]
+	diffc = diff --cached --word-diff -M.1 -C.1 -w
+	# diffu = diff -M -C -w HEAD@{u}...
+	diffu = "!f() { branch=${1:-HEAD}; git diff --word-diff -M.1 -C.1 -w \"${branch}@{u}...${branch}\"; }; f"
+	b = branch --list -vv
+[pager]
+	branch = cat
+[diff]
+	wordRegex = [a-zA-Z0-9_-]+
+	external = difft
+[gc]
+	auto = 0
+[advice]
+	detachedHead = false
