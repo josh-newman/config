@@ -1,0 +1,36 @@
+export LESS=-R
+
+function source-if-exists() {
+    if [[ -f "$1" ]]; then
+        . "$1"
+    fi
+}
+
+source-if-exists "$HOME/.nix-profile/etc/profile.d/nix.sh"
+source-if-exists "$HOME/.nix-profile/etc/profile.d/bash_completion.sh"
+source-if-exists "$HOME/.nix-profile/share/bash-completion/bash_completion"
+source-if-exists "$HOME/.nix-profile/share/fzf/completion.bash"
+source-if-exists "$HOME/.nix-profile/share/fzf/key-bindings.bash"
+source-if-exists "$HOME/.nix-profile/share/git/contrib/completion/git-completion.bash"
+source-if-exists "$HOME/.nix-profile/share/git/contrib/completion/git-prompt.sh"
+
+# source-if-exists "$HOME/src/github.com/lincheney/fzf-tab-completion/bash/fzf-bash-completion.sh"
+# bind -x '"\t": fzf_bash_completion'
+# export FZF_COMPLETION_AUTO_COMMON_PREFIX=true
+# export FZF_COMPLETION_AUTO_COMMON_PREFIX_PART=true
+
+PS1='\n\[\e[32m\]\u@\h\[\e[m\] \[\e[34m\]\w\[\e[m\] \t \[\e[31m\]$?\[\e[m\]$(__git_ps1) \$ '
+
+alias ls='ls -G'
+
+PATH="$PATH:$HOME/bin"
+PATH="$PATH:$HOME/.docker/bin"
+
+eval "$($HOME/.nix-profile/bin/direnv hook bash)"
+
+shopt -s histappend
+HISTSIZE=1000000
+HISTFILESIZE=10000000
+HISTCONTROL=ignoredups:ignorespace
+
+ulimit -n 4096
